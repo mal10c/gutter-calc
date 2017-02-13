@@ -95,20 +95,20 @@
 
 				if ( ballThrow === 0 )
 				{
-					document.getElementById("cmd_strike").disabled = false;
-					document.getElementById("cmd_spare").disabled = true;
+					document.getElementById("cmd_strike").style.visibility = "visible";
+					document.getElementById("cmd_spare").style.visibility = "hidden";
 
 					for (var index = 1; index <= 9; index++ )
 					{
-						document.getElementById("cmd_" + index).disabled = false;
+						document.getElementById("cmd_" + index).style.visibility = "visible";
 					}
 				}
 				else
 				{
 					if ( frame < 9 )
 					{
-						document.getElementById("cmd_strike").disabled = true;
-						document.getElementById("cmd_spare").disabled = false;
+						document.getElementById("cmd_strike").style.visibility = "hidden";
+						document.getElementById("cmd_spare").style.visibility = "visible";
 
 						var previousThrowValue = document.getElementById(frame + "" + parseInt(ballThrow-1)).innerHTML;
 
@@ -119,11 +119,11 @@
 							{
 								if ( index < previousThrowValue )
 								{
-									document.getElementById("cmd_" + index).disabled = false;
+									document.getElementById("cmd_" + index).style.visibility = "visible";
 								}
 								else
 								{
-									document.getElementById("cmd_" + index).disabled = true;
+									document.getElementById("cmd_" + index).style.visibility = "hidden";
 								}
 							}
 						}
@@ -131,7 +131,7 @@
 						{
 							for (var index = 1; index <= 9; index++ )
 							{
-								document.getElementById("cmd_" + index).disabled = false;
+								document.getElementById("cmd_" + index).style.visibility = "visible";
 							}
 						}
 
@@ -139,8 +139,8 @@
 					}
 					else
 					{
-						document.getElementById("cmd_strike").disabled = false;	// FIXME: Wrong!
-						document.getElementById("cmd_spare").disabled = false;
+						document.getElementById("cmd_strike").style.visibility = "visible";	// FIXME: Wrong!
+						document.getElementById("cmd_spare").style.visibility = "visible";
 					}
 				}				
 
