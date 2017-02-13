@@ -259,93 +259,127 @@
 				set_active_frame ( nextFrame, nextThrow );
 			}
 
+			function convert_scorecard_to_array ( )
+			{
+
+				var arr = [];
+
+				for ( var frameIndex = 0; frameIndex <= 9; frameIndex++ )
+				{
+					arr.push ( document.getElementById(frameIndex + "0").innerHTML );
+					arr.push ( document.getElementById(frameIndex + "1").innerHTML );
+
+					if ( frameIndex == 9 )
+					{
+						arr.push ( document.getElementById(frameIndex + "2").innerHTML );
+					}
+				}
+
+				return arr;
+			}
+
+			function get_next_throw_index ( arr, currentIndex )
+			{
+
+				if ( currentIndex < 18 )		// Not in frame 10
+				{
+					if ( arr[currentIndex] == "X" )
+					{
+						currentIndex += 2;
+					}
+					else
+					{
+						currentIndex += 1;
+					}
+				}
+				else
+				{
+					currentIndex += 1;
+				}
+
+				return currentIndex;
+
+			}
+
+			function convert_scorecard_index_to_val ( arr, index, entry )
+			{
+				var val = 0;
+
+				if ( entry == "X" )
+				{
+					val = 10;
+				}
+				else if ( entry == "." || entry == "" )
+				{
+					val = 0;
+				}
+				else if ( entry == "/" )
+				{
+					val += 10;
+					val -= arr[index - 1];
+				}
+				else
+				{
+					val = parseInt(entry);
+				}
+
+				return val;
+			}
+
+			function calculate_score_for_frame ( arr, frame )
+			{
+				var frameIndex = frame * 2;
+				var score = 0;
+				var peekIndex;
+
+				if ( arr[frameIndex] == "X" )
+				{
+					score += 10;
+					peekIndex = get_next_throw_index ( arr, frameIndex );
+					if ( peekIndex < 21 )
+					{
+						score += convert_scorecard_index_to_val ( arr, peekIndex, arr[peekIndex] );
+						peekIndex = get_next_throw_index ( arr, peekIndex );
+						if ( peekIndex < 21 )
+						{
+							score += convert_scorecard_index_to_val ( arr, peekIndex, arr[peekIndex] );
+						}
+					}
+				}
+				else if ( arr[frameIndex + 1] == "/" )
+				{
+					frameIndex++;
+					score += 10;
+					peekIndex = get_next_throw_index ( arr, frameIndex );
+					if ( peekIndex < 21 )
+					{
+						score += convert_scorecard_index_to_val ( arr, peekIndex, arr[peekIndex] );
+					}
+				}
+				else
+				{
+					score += convert_scorecard_index_to_val ( arr, peekIndex, arr[frameIndex] );
+					score += convert_scorecard_index_to_val ( arr, peekIndex, arr[frameIndex + 1] );
+				}				
+
+				return score;
+			}
 
 			function calculate_score ( )
 			{
 
+				var frameScore = 0;
 				var score = 0;
+				var arr = convert_scorecard_to_array ( );
 
-				for ( var frameIndex = 0; frameIndex <= 9; frameIndex++ )
+				for ( var frameIndex = 0; frameIndex < 10; frameIndex++ )
 				{
-				
-
-					var value = document.getElementById(frameIndex + "0").innerHTML;
-					if ( value == "X" )
-					{
-						value = 10;
-					}
-					else if ( value == "/" )
-					{
-						value = 10;
-					}
-					else if ( value == "" || value == "." )
-					{
-						value = 0;
-					}
-					else
-					{
-						value = parseInt(value);
-					}
-
-					score += value;
-
-					isDisabled = (document.getElementById(frameIndex + "1").style.backgroundColor == _disabledColor);
-
-					if ( isDisabled === false )
-					{
-						var value = document.getElementById(frameIndex + "1").innerHTML;
-						if ( value == "X" )
-						{
-							value = 10;
-						}
-						else if ( value == "/" )
-						{
-							value = 10;
-						}
-						else if ( value == "" || value == "." )
-						{
-							value = 0;
-						}
-						else
-						{
-							value = parseInt(value);
-						}
-
-						score += value;
-					}
-
-
-
-					if ( frameIndex == 9 )
-					{
-						isDisabled = (document.getElementById(frameIndex + "2").style.backgroundColor == _disabledColor);
-
-						if ( isDisabled === false )
-						{
-							var value = document.getElementById(frameIndex + "2").innerHTML;
-							if ( value == "X" )
-							{
-								value = 10;
-							}
-							else if ( value == "/" )
-							{
-								value = 10;
-							}
-							else if ( value == "" || value == "." )
-							{
-								value = 0;
-							}
-							else
-							{
-								value = parseInt(value);
-							}
-
-							score += value;
-						}
-					}
-
-					console.log ( "Score", score );
+					frameScore = calculate_score_for_frame ( arr, frameIndex );
+					score += frameScore;
+					document.getElementById("frameScore" + frameIndex).innerHTML = score;
 				}
+
+				console.info ( "Score", score );
 
 			}
 
@@ -380,6 +414,18 @@
 				<td class="pointCell" id="70"></td><td class="pointCell" id="71"></td>
 				<td class="pointCell" id="80"></td><td class="pointCell" id="81"></td>
 				<td class="pointCell" id="90"></td><td class="pointCell" id="91"></td><td class="pointCell" id="92"></td>
+			</tr>
+			<tr>
+				<td class="frameScoreCell" colspan="2" id="frameScore0"></td>
+				<td class="frameScoreCell" colspan="2" id="frameScore1"></td>
+				<td class="frameScoreCell" colspan="2" id="frameScore2"></td>
+				<td class="frameScoreCell" colspan="2" id="frameScore3"></td>
+				<td class="frameScoreCell" colspan="2" id="frameScore4"></td>
+				<td class="frameScoreCell" colspan="2" id="frameScore5"></td>
+				<td class="frameScoreCell" colspan="2" id="frameScore6"></td>
+				<td class="frameScoreCell" colspan="2" id="frameScore7"></td>
+				<td class="frameScoreCell" colspan="2" id="frameScore8"></td>
+				<td class="frameScoreCell" colspan="3" id="frameScore9">0</td>
 			</tr>
 		</table>
 
