@@ -97,6 +97,11 @@
 				{
 					document.getElementById("cmd_strike").disabled = false;
 					document.getElementById("cmd_spare").disabled = true;
+
+					for (var index = 1; index <= 9; index++ )
+					{
+						document.getElementById("cmd_" + index).disabled = false;
+					}
 				}
 				else
 				{
@@ -104,13 +109,34 @@
 					{
 						document.getElementById("cmd_strike").disabled = true;
 						document.getElementById("cmd_spare").disabled = false;
+
+						var previousThrowValue = document.getElementById(frame + "" + parseInt(ballThrow-1)).innerHTML;
+
+						if ( previousThrowValue != "X" )
+						{
+							previousThrowValue = 10 - parseInt(previousThrowValue);
+							for (var index = 1; index <= 9; index++ )
+							{
+								if ( index < previousThrowValue )
+								{
+									document.getElementById("cmd_" + index).disabled = false;
+								}
+								else
+								{
+									document.getElementById("cmd_" + index).disabled = true;
+								}
+							}
+						}
+
+						console.log ( "Previous", previousThrowValue );
 					}
 					else
 					{
 						document.getElementById("cmd_strike").disabled = false;	// FIXME: Wrong!
 						document.getElementById("cmd_spare").disabled = false;
 					}
-				}
+				}				
+
 
 				if ( disableFollowingFrames === true )
 				{
@@ -260,19 +286,19 @@
 
 		<table border="1">
 			<tr>
-				<td><button type="button">1</button></td>
-				<td><button type="button">2</button></td>
-				<td><button type="button">3</button></td>
+				<td><button type="button" id="cmd_1">1</button></td>
+				<td><button type="button" id="cmd_2">2</button></td>
+				<td><button type="button" id="cmd_3">3</button></td>
 			</tr>
 			<tr>
-				<td><button type="button">4</button></td>
-				<td><button type="button">5</button></td>
-				<td><button type="button">6</button></td>
+				<td><button type="button" id="cmd_4">4</button></td>
+				<td><button type="button" id="cmd_5">5</button></td>
+				<td><button type="button" id="cmd_6">6</button></td>
 			</tr>
 			<tr>
-				<td><button type="button">7</button></td>
-				<td><button type="button">8</button></td>
-				<td><button type="button">9</button></td>
+				<td><button type="button" id="cmd_7">7</button></td>
+				<td><button type="button" id="cmd_8">8</button></td>
+				<td><button type="button" id="cmd_9">9</button></td>
 			</tr>
 			<tr>
 				<td><button type="button" id="cmd_spare">/</button></td>
