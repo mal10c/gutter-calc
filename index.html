@@ -24,6 +24,9 @@
 
 		<script language="javascript">
 
+			var _activeFrame = 0;
+			var _activeThrow = 0;
+
 			function on_load ( )
 			{
 
@@ -39,6 +42,60 @@
 
 				});
 
+
+				set_active_frame ( 0, 0, true );
+
+			}
+
+			function set_active_frame ( frame, ballThrow, disableFollowingFrames )
+			{
+
+				var oldID = _activeFrame + "" + _activeThrow;
+				document.getElementById(oldID).style.backgroundColor = "white";
+
+				var newID = frame + "" + ballThrow;
+				document.getElementById(newID).style.backgroundColor = "red";
+
+				if ( disableFollowingFrames === true )
+				{
+
+					if ( frame < 9 )
+					{
+						if ( ballThrow === 0 )
+						{
+							document.getElementById(frame + "1").style.backgroundColor = "gray";
+						}
+					}
+					else
+					{
+						if ( ballThrow === 0 )
+						{
+							document.getElementById(frame + "1").style.backgroundColor = "gray";
+							document.getElementById(frame + "2").style.backgroundColor = "gray";
+						}
+						else if ( ballThrow === 1 )
+						{
+							document.getElementById(frame + "2").style.backgroundColor = "gray";
+						}
+					}
+
+					for ( var index = frame + 1; index < 10; index++ )
+					{
+						disable_frame ( index );
+					}
+				}
+			}
+
+			function disable_frame ( frame )
+			{
+
+				document.getElementById(frame + "0").style.backgroundColor = "gray";
+				document.getElementById(frame + "1").style.backgroundColor = "gray";
+
+				if ( frame === 9 )
+				{
+					document.getElementById(frame + "2").style.backgroundColor = "gray";
+				}
 			}
 
 			function point_cell_clicked ( pointCell )
@@ -66,7 +123,7 @@
 				<td class="frameHeaderCell" colspan="3">10</td>
 			</tr>
 			<tr>
-				<td class="pointCell" id="00"></td><td class="pointCell" id="01"></td>
+				<td class="pointCell" id="00" disabled></td><td class="pointCell" id="01"></td>
 				<td class="pointCell" id="10"></td><td class="pointCell" id="11"></td>
 				<td class="pointCell" id="20"></td><td class="pointCell" id="21"></td>
 				<td class="pointCell" id="30"></td><td class="pointCell" id="31"></td>
