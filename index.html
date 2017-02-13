@@ -112,7 +112,7 @@
 
 						var previousThrowValue = document.getElementById(frame + "" + parseInt(ballThrow-1)).innerHTML;
 
-						if ( previousThrowValue != "X" )
+						if ( previousThrowValue != "." )
 						{
 							previousThrowValue = 10 - parseInt(previousThrowValue);
 							for (var index = 1; index <= 9; index++ )
@@ -125,6 +125,13 @@
 								{
 									document.getElementById("cmd_" + index).disabled = true;
 								}
+							}
+						}
+						else
+						{
+							for (var index = 1; index <= 9; index++ )
+							{
+								document.getElementById("cmd_" + index).disabled = false;
 							}
 						}
 
@@ -302,7 +309,8 @@
 			</tr>
 			<tr>
 				<td><button type="button" id="cmd_spare">/</button></td>
-				<td colspan="2"><button type="button" id="cmd_strike">X</button></td>
+				<td><button type="button" id="cmd_strike">X</button></td>
+				<td><button type="button" id="cmd_gutter">.</button></td>
 			</tr>
 		</table>
 
