@@ -79,6 +79,9 @@
 							advance_to_next_throw ( );
 						}
 
+
+						calculate_score ( );
+
 					});
 				});
 
@@ -255,6 +258,97 @@
 
 				set_active_frame ( nextFrame, nextThrow );
 			}
+
+
+			function calculate_score ( )
+			{
+
+				var score = 0;
+
+				for ( var frameIndex = 0; frameIndex <= 9; frameIndex++ )
+				{
+				
+
+					var value = document.getElementById(frameIndex + "0").innerHTML;
+					if ( value == "X" )
+					{
+						value = 10;
+					}
+					else if ( value == "/" )
+					{
+						value = 10;
+					}
+					else if ( value == "" || value == "." )
+					{
+						value = 0;
+					}
+					else
+					{
+						value = parseInt(value);
+					}
+
+					score += value;
+
+					isDisabled = (document.getElementById(frameIndex + "1").style.backgroundColor == _disabledColor);
+
+					if ( isDisabled === false )
+					{
+						var value = document.getElementById(frameIndex + "1").innerHTML;
+						if ( value == "X" )
+						{
+							value = 10;
+						}
+						else if ( value == "/" )
+						{
+							value = 10;
+						}
+						else if ( value == "" || value == "." )
+						{
+							value = 0;
+						}
+						else
+						{
+							value = parseInt(value);
+						}
+
+						score += value;
+					}
+
+
+
+					if ( frameIndex == 9 )
+					{
+						isDisabled = (document.getElementById(frameIndex + "2").style.backgroundColor == _disabledColor);
+
+						if ( isDisabled === false )
+						{
+							var value = document.getElementById(frameIndex + "2").innerHTML;
+							if ( value == "X" )
+							{
+								value = 10;
+							}
+							else if ( value == "/" )
+							{
+								value = 10;
+							}
+							else if ( value == "" || value == "." )
+							{
+								value = 0;
+							}
+							else
+							{
+								value = parseInt(value);
+							}
+
+							score += value;
+						}
+					}
+
+					console.log ( "Score", score );
+				}
+
+			}
+
 
 		</script>
 
