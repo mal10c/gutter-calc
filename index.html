@@ -1,9 +1,83 @@
 <!DOCTYPE HTML>
 <html>
 
-	<body>
+	<head>
 
-		Hello
+		<style type="text/css">
+
+			table {
+				border: 1px solid black;
+			}
+
+			.frameHeaderCell {
+				border: 1px solid blue;
+				text-align: center;
+				font-weight: bold;
+			}
+
+			.pointCell {
+				border: 1px solid blue;
+				padding: 20px;
+			}
+
+		</style>
+
+		<script language="javascript">
+
+			function on_load ( )
+			{
+
+				var pointCellElements = document.querySelectorAll(".pointCell");
+
+				pointCellElements.forEach(function(pointCell) {
+					
+					pointCell.addEventListener("click", function() {
+						
+						point_cell_clicked ( this );
+
+					});
+
+				});
+
+			}
+
+			function point_cell_clicked ( pointCell )
+			{
+				console.log ( "ID", pointCell.id );
+			}
+
+		</script>
+
+	</head>
+
+	<body onload="on_load();">
+
+		<table>
+			<tr>
+				<td class="frameHeaderCell" colspan="2">1</td>
+				<td class="frameHeaderCell" colspan="2">2</td>
+				<td class="frameHeaderCell" colspan="2">3</td>
+				<td class="frameHeaderCell" colspan="2">4</td>
+				<td class="frameHeaderCell" colspan="2">5</td>
+				<td class="frameHeaderCell" colspan="2">6</td>
+				<td class="frameHeaderCell" colspan="2">7</td>
+				<td class="frameHeaderCell" colspan="2">8</td>
+				<td class="frameHeaderCell" colspan="2">9</td>
+				<td class="frameHeaderCell" colspan="3">10</td>
+			</tr>
+			<tr>
+				<td class="pointCell" id="00"></td><td class="pointCell" id="01"></td>
+				<td class="pointCell" id="10"></td><td class="pointCell" id="11"></td>
+				<td class="pointCell" id="20"></td><td class="pointCell" id="21"></td>
+				<td class="pointCell" id="30"></td><td class="pointCell" id="31"></td>
+				<td class="pointCell" id="40"></td><td class="pointCell" id="41"></td>
+				<td class="pointCell" id="50"></td><td class="pointCell" id="51"></td>
+				<td class="pointCell" id="60"></td><td class="pointCell" id="61"></td>
+				<td class="pointCell" id="70"></td><td class="pointCell" id="71"></td>
+				<td class="pointCell" id="80"></td><td class="pointCell" id="81"></td>
+				<td class="pointCell" id="90"></td><td class="pointCell" id="91"></td><td class="pointCell" id="92"></td>
+			</tr>
+		</table>
 
 	</body>
 
