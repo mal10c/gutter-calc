@@ -59,6 +59,10 @@
 						document.getElementById(_activeFrame + "" + _activeThrow).innerHTML = val;
 						if ( val == "X" )
 						{
+							if ( (is_next_throw_disabled() === true) && _activeFrame < 9 )
+							{
+								advance_to_next_throw ( );
+							}
 						}
 						else if ( val == "/" )
 						{
@@ -96,8 +100,16 @@
 				}
 				else
 				{
-					document.getElementById("cmd_strike").disabled = true;
-					document.getElementById("cmd_spare").disabled = false;
+					if ( frame < 9 )
+					{
+						document.getElementById("cmd_strike").disabled = true;
+						document.getElementById("cmd_spare").disabled = false;
+					}
+					else
+					{
+						document.getElementById("cmd_strike").disabled = false;	// FIXME: Wrong!
+						document.getElementById("cmd_spare").disabled = false;
+					}
 				}
 
 				if ( disableFollowingFrames === true )
