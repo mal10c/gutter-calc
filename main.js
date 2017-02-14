@@ -8,9 +8,9 @@ var mainWindow = null;
 app.on('ready', function() {
     mainWindow = new BrowserWindow({
         height: 600,
-        width: 1600
+        width: 1200
     });
 
     mainWindow.loadURL('file://' + __dirname + '/index.html');
-    mainWindow.webContents.openDevTools();
+    //mainWindow.webContents.openDevTools();
 });
