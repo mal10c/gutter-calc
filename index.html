@@ -63,6 +63,13 @@
 							{
 								advance_to_next_throw ( );
 							}
+							else
+							{
+								if ( _activeFrame < 9 )
+								{
+									document.getElementById(_activeFrame + "1").innerHTML = "";
+								}
+							}
 						}
 						else if ( val == "/" )
 						{
@@ -376,8 +383,10 @@
 				{
 					frameScore = calculate_score_for_frame ( arr, frameIndex );
 					score += frameScore;
-					document.getElementById("frameScore" + frameIndex).innerHTML = score;
+					document.getElementById("frameScore" + frameIndex).innerHTML = frameScore;
 				}
+
+				document.getElementById("totalScore").innerHTML = "Score: " + score;
 
 				console.info ( "Score", score );
 
@@ -425,11 +434,11 @@
 				<td class="frameScoreCell" colspan="2" id="frameScore6"></td>
 				<td class="frameScoreCell" colspan="2" id="frameScore7"></td>
 				<td class="frameScoreCell" colspan="2" id="frameScore8"></td>
-				<td class="frameScoreCell" colspan="3" id="frameScore9">0</td>
+				<td class="frameScoreCell" colspan="3" id="frameScore9"></td>
 			</tr>
 		</table>
 
-		<br />
+		<div id="totalScore">0</div>
 
 		<table border="1">
 			<tr>
