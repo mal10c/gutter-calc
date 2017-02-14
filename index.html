@@ -420,7 +420,100 @@
 
 				document.getElementById("extraPoints").innerHTML = "Extra Points: " + parseInt(score - openPoints);
 
+
+				var avg = calculate_average_per_frame ( arr );
+				document.getElementById("avgPerFrame").innerHTML = "Average Per Frame: " + avg;
+
+
+				
+				var goal = document.getElementById("txt_goal").value;
+				var fromGoal = parseInt(goal - score);
+				
+				var maxPoints = calculate_max_points ( arr );
+				document.getElementById("maxPoints").innerHTML = "Max points that can be achieved: " + maxPoints;
+
+				if ( fromGoal < 0 )
+				{
+					document.getElementById("fromGoal").innerHTML = "GOAL ACHIEVED!";
+				}
+				else if ( maxPoints < goal )
+				{
+					document.getElementById("fromGoal").innerHTML = "Goal missed :-(";
+				}
+				else
+				{
+					document.getElementById("fromGoal").innerHTML = fromGoal + " points to go!";
+				}
+
 			}
+
+
+			function calculate_average_per_frame ( arr )
+			{
+				var avg = 0;
+
+				for ( var index = 0; index < _activeFrame && index < 9; index++ )
+				{
+					avg += calculate_open_points_in_frame ( arr, index );
+				}
+
+				avg /= _activeFrame;
+
+				return parseInt(avg);
+			}
+
+
+			function calculate_max_points ( arr )
+			{
+
+				var score = 0;
+
+				console.info ( "Arr 1", arr );
+
+				for ( var index = 0; index < 21; index += 2 )
+				{
+					if ( arr[index] != "X" || index >= 18 )
+					{
+						if ( arr[index] == "" )
+						{
+							arr[index] = "X";
+							if ( index >= 18 )
+							{
+								arr[index + 1] = "X";
+								arr[index + 2] = "X";
+								index++;
+							}
+						}
+						else if ( arr[index + 1] == "" && index < 18 )
+						{
+							arr[index + 1] = "/";
+						}
+						else if ( index >= 18 && arr[index + 1] == "" )
+						{
+							console.log ( "Index adding X", index );
+							arr[index + 1] = "X";
+							arr[index + 2] = "X";
+							index++;
+						}
+						else if ( index >= 18 && arr[index + 2] == "" )
+						{
+							arr[index + 2] = "X";
+						}
+					}
+				}
+
+				console.info ( "Arr 2", arr );
+
+				for ( var frameIndex = 0; frameIndex < 10; frameIndex++ )
+				{
+					frameScore = calculate_score_for_frame ( arr, frameIndex );
+					score += frameScore;
+				}
+
+				return score;
+
+			}
+
 
 			function calculate_open_points ( arr )
 			{
@@ -450,6 +543,41 @@
 					{
 						openPoints += parseInt(arr[index]);
 					}
+				}
+
+				return openPoints;
+
+			}
+
+
+
+			function calculate_open_points_in_frame ( arr, index )
+			{
+
+				var openPoints = 0;
+				index *= 2;
+
+				if ( arr[index] == "X" )
+				{
+					openPoints += 10;
+				}
+				else if ( arr[index + 1] == "/" )
+				{
+					openPoints += 10;
+				}
+				else
+				{
+				
+					if ( arr[index] != "." && arr[index] != ""  )
+					{
+						openPoints += parseInt(arr[index]);
+					}
+
+					if ( arr[index + 1] != "." && arr[index + 1] != "" )
+					{
+						openPoints += parseInt(arr[index + 1]);
+					}
+
 				}
 
 				return openPoints;
@@ -507,7 +635,7 @@
 
 	<body onload="on_load();">
 
-		<div id="goal">Goal: <input type="text" id="txt_goal" /><button type="button">Start Game</button></div>
+		<div id="goal">Goal: <input type="text" id="txt_goal" value="200" /><button type="button">Start Game</button></div>
 
 		<table>
 			<tr>
@@ -551,6 +679,10 @@
 		<div id="totalScore"></div>
 		<div id="openPoints"></div>
 		<div id="extraPoints"></div>
+		<div id="maxPoints"></div>
+
+		<div id="fromGoal"></div>
+		<div id="avgPerFrame"></div>
 
 
 		<table border="1">
