@@ -20,6 +20,11 @@
 				padding: 20px;
 			}
 
+			.frameScoreCell {
+				font-weight: bold;
+				text-align: center; 
+			}
+
 		</style>
 
 		<script language="javascript">
@@ -50,7 +55,13 @@
 				set_active_frame ( _activeFrame, _activeThrow, true );
 
 
-				var buttons = document.querySelectorAll("button");
+				var frameScoreCells = document.querySelectorAll(".frameScoreCell");
+				frameScoreCells.forEach(function(frameScoreCell) {
+					frameScoreCell.style.color = "gray";
+				});
+
+
+				var buttons = document.querySelectorAll(".scoreButton");
 				buttons.forEach(function(btn) {
 					btn.addEventListener("click", function() {
 
@@ -383,7 +394,17 @@
 				{
 					frameScore = calculate_score_for_frame ( arr, frameIndex );
 					score += frameScore;
-					document.getElementById("frameScore" + frameIndex).innerHTML = frameScore;
+
+					if ( is_frame_closed(arr, frameIndex) === true )
+					{
+						document.getElementById("frameScore" + frameIndex).innerHTML = frameScore;
+						document.getElementById("frameScore" + frameIndex).style.color = "blue";
+						document.getElementById("frameScore" + frameIndex).style.color = "blue";
+					}
+					else
+					{
+						document.getElementById("frameScore" + frameIndex).innerHTML = frameScore;
+					}
 				}
 
 				document.getElementById("totalScore").innerHTML = "Score: " + score;
@@ -393,11 +414,57 @@
 			}
 
 
+			function is_frame_closed ( arr, frame )
+			{
+				var frameIndex = frame * 2;
+				var score = 0;
+				var peekIndex;
+				var frameClosed = false;
+
+				if ( arr[frameIndex] == "X" )
+				{
+					peekIndex = get_next_throw_index ( arr, frameIndex );
+					if ( peekIndex < 21 )
+					{
+						if ( arr[peekIndex] != "" )
+						{
+							peekIndex = get_next_throw_index ( arr, peekIndex );
+							if ( peekIndex < 21 )
+							{
+								if ( arr[peekIndex] != "" )
+								{
+									frameClosed = true;
+								}
+							}
+						}
+					}
+				}
+				else if ( arr[frameIndex + 1] == "/" )
+				{
+					if ( arr[frameIndex + 2] != "" )
+					{
+						frameClosed = true;
+					}
+				}
+				else
+				{
+					if ( arr[frameIndex] != "" && arr[frameIndex + 1] != "")
+					{
+						frameClosed = true;
+					}
+				}				
+
+				return frameClosed;
+			}
+
+
 		</script>
 
 	</head>
 
 	<body onload="on_load();">
+
+		<div id="goal">Goal: <input type="text" id="txt_goal" /><button type="button">Start Game</button></div>
 
 		<table>
 			<tr>
@@ -440,26 +507,27 @@
 
 		<div id="totalScore">0</div>
 
+
 		<table border="1">
 			<tr>
-				<td><button type="button" id="cmd_1">1</button></td>
-				<td><button type="button" id="cmd_2">2</button></td>
-				<td><button type="button" id="cmd_3">3</button></td>
+				<td><button class="scoreButton" type="button" id="cmd_1">1</button></td>
+				<td><button class="scoreButton" type="button" id="cmd_2">2</button></td>
+				<td><button class="scoreButton" type="button" id="cmd_3">3</button></td>
 			</tr>
 			<tr>
-				<td><button type="button" id="cmd_4">4</button></td>
-				<td><button type="button" id="cmd_5">5</button></td>
-				<td><button type="button" id="cmd_6">6</button></td>
+				<td><button class="scoreButton" type="button" id="cmd_4">4</button></td>
+				<td><button class="scoreButton" type="button" id="cmd_5">5</button></td>
+				<td><button class="scoreButton" type="button" id="cmd_6">6</button></td>
 			</tr>
 			<tr>
-				<td><button type="button" id="cmd_7">7</button></td>
-				<td><button type="button" id="cmd_8">8</button></td>
-				<td><button type="button" id="cmd_9">9</button></td>
+				<td><button class="scoreButton" type="button" id="cmd_7">7</button></td>
+				<td><button class="scoreButton" type="button" id="cmd_8">8</button></td>
+				<td><button class="scoreButton" type="button" id="cmd_9">9</button></td>
 			</tr>
 			<tr>
-				<td><button type="button" id="cmd_spare">/</button></td>
-				<td><button type="button" id="cmd_strike">X</button></td>
-				<td><button type="button" id="cmd_gutter">.</button></td>
+				<td><button class="scoreButton" type="button" id="cmd_spare">/</button></td>
+				<td><button class="scoreButton" type="button" id="cmd_strike">X</button></td>
+				<td><button class="scoreButton" type="button" id="cmd_gutter">.</button></td>
 			</tr>
 		</table>
 
