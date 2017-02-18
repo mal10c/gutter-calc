@@ -1,5 +1,12 @@
 # gutter-calc
 
-In development...
+Score keeper for bowling.
 
-Run with: npm start
+To compile:
+	
+	`npm run dist`
+
+To run without building:
+
+	`npm start`
+
