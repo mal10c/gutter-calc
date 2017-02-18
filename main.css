@@ -1,0 +1,24 @@
+table {
+	border: 1px solid black;
+}
+
+.frameHeaderCell {
+	border: 1px solid blue;
+	text-align: center;
+	font-weight: bold;
+}
+
+.pointCell {
+	border: 1px solid blue;
+	padding: 20px;
+}
+
+.frameScoreCell {
+	font-weight: bold;
+	text-align: center;
+	border: 1px solid green;
+}
+
+#totalScore {
+	font-weight: bold;
+}
