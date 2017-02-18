@@ -3,10 +3,13 @@
 Score keeper for bowling.
 
 To compile:
-	
-	`npm run dist`
+
+```bash	
+npm run dist
+```
 
 To run without building:
 
-	`npm start`
-
+```bash
+npm start
+```
