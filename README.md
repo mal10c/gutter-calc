@@ -16,7 +16,7 @@ npm start
 
 ## Notes:
 
-	- For now, this is configured to compile on Windows 64-bit only.
-	- This is in active development and may contain bugs.
+ * For now, this is configured to compile on Windows 64-bit only.
+ * This is in active development and may contain bugs.
 
 
