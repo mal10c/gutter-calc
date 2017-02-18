@@ -20,3 +20,10 @@ npm start
  * This is in active development and may contain bugs.
 
 
+## Dependencies
+
+ 1. Install node.js (https://nodejs.org/en/)
+ 2. Install electron (npm install electron -g)
+ 3. Install electron-builder (npm install electron-builder -g)
+
+**Note:** This will install electron and electron-builder globally.
