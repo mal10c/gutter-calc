@@ -1,0 +1,7 @@
+{
+    "name": "Gutter-Calc",
+    "description": "Bowling Coach",
+    "version": "1.0.0",
+    "main": "./main.js",
+    "author": "e@edr.xyz"
+}

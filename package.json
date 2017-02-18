@@ -1,9 +1,19 @@
 {
-    "name": "Gutter-Calc",
-    "version": "1.0.0",
-    "main": "./main.js",
+    "devDependencies": {
+        "electron-builder": "~5.12.X",
+        "electron-prebuilt": "~1.4.13"
+    },
+    "build": {
+        "appId": "hr.creaticon.eatodo",
+        "mac.category": "public.app-category.productivity",
+        "win": {
+            "iconUrl": "http://eatodo.s3.amazonaws.com/icon.ico"
+        }
+    },
     "scripts": {
-        "start": "electron .",
-        "build": "electron-packager . --overwrite --platform=win32 --arch=x64 --prune=true --out=release-builds --electron-version=\"1.4.13\""
-    }
+	    "postinstall": "install-app-deps",
+	    "start": "electron ./app --enable-logging",
+	    "dev": "NODE_ENV='development' npm run start",
+	    "dist": "build --x64"
+	}
 }
