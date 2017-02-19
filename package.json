@@ -1,12 +1,20 @@
 {
+    "dependencies": {},
     "devDependencies": {
-        "electron-builder": "~5.12.X",
-        "electron-prebuilt": "~1.4.13"
+        "electron": "1.4.13",
+        "electron-builder": "latest"
     },
     "build": {
         "appId": "hr.creaticon.eatodo",
         "mac.category": "public.app-category.productivity",
+        "linux": {
+            "target": [
+                "AppImage",
+                "deb"
+            ]
+        },
         "win": {
+            "target": "NSIS",
             "iconUrl": "http://eatodo.s3.amazonaws.com/icon.ico"
         }
     },
@@ -14,6 +22,6 @@
 	    "postinstall": "install-app-deps",
 	    "start": "electron ./app --enable-logging",
 	    "dev": "NODE_ENV='development' npm run start",
-	    "dist": "build --x64"
+	    "dist": "build --x64 --ia32"
 	}
 }

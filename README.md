@@ -27,3 +27,5 @@ npm start
  3. Install electron-builder (npm install electron-builder -g)
 
 **Note:** This will install electron and electron-builder globally.
+
+Useful electron-builder Wiki: https://github.com/electron-userland/electron-builder/wiki
