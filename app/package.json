@@ -3,5 +3,11 @@
     "description": "Bowling Coach",
     "version": "1.0.0",
     "main": "./main.js",
-    "author": "e@edr.xyz"
+    "author": "Eric Ratliff <e@edr.xyz>",
+    "devDependencies": {
+
+    },
+    "dependencies": {
+    	"nedb": "latest"
+    }
 }

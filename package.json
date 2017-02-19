@@ -11,7 +11,8 @@
             "target": [
                 "AppImage",
                 "deb"
-            ]
+            ],
+            "iconUrl": "http://eatodo.s3.amazonaws.com/icon.ico"
         },
         "win": {
             "target": "NSIS",
