@@ -21,7 +21,7 @@
   },
   "scripts": {
     "postinstall": "install-app-deps",
-    "start": "electron ./app --enable-logging",
+    "start": "node_modules/electron/dist/electron ./app --enable-logging",
     "dev": "NODE_ENV='development' npm run start",
     "dist": "build --x64 --ia32"
   }
