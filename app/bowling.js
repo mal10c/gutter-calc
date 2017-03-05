@@ -20,7 +20,7 @@ function on_load ( )
 
 	// 2017-02-19 (g1)
 	add_previous_game ( 
-		{
+		[
 			'7', '/',		// Frame 1
 			'8', '/',		// Frame 2
 			'X', '',		// Frame 3
@@ -31,12 +31,12 @@ function on_load ( )
 			'7', '.',		// Frame 8
 			'7', '/',		// Frame 9
 			'7', '/', '5'	// Frame 10
-		}
+		]
 	);
 
 	// 2017-02-19 (g2)
 	add_previous_game ( 
-		{
+		[
 			'X', '',		// Frame 1
 			'X', '',		// Frame 2
 			'5', '/',		// Frame 3
@@ -47,12 +47,12 @@ function on_load ( )
 			'7', '1',		// Frame 8
 			'9', '.',		// Frame 9
 			'X', '8', '1'	// Frame 10
-		}
+		]
 	);
 
 	// 2017-02-19 (g3)
 	add_previous_game ( 
-		{
+		[
 			'9', '/',
 			'4', '4',
 			'6', '1',
@@ -63,7 +63,7 @@ function on_load ( )
 			'7', '2',
 			'9', '.',
 			'X', '9', '.'
-		}
+		]
 	);
 
 
@@ -71,7 +71,7 @@ function on_load ( )
 
 	// 2017-02-26 (g1)
 	add_previous_game ( 
-		{
+		[
 			'5', '2',
 			'9', '/',
 			'6', '2',
@@ -82,12 +82,12 @@ function on_load ( )
 			'X', '',
 			'7', '/',
 			'6', '3', '.'
-		}
+		]
 	);
 
 	// 2017-02-26 (g2)
 	add_previous_game ( 
-		{
+		[
 			'9', '/',
 			'X', '',
 			'8', '/',
@@ -98,13 +98,13 @@ function on_load ( )
 			'6', '.',
 			'6', '/',
 			'7', '/', '9'
-		}
+		]
 	);
 
 
 	// 2017-02-26 (g3)
 	add_previous_game ( 
-		{
+		[
 			'X', '',
 			'X', '',
 			'6', '/',
@@ -115,7 +115,7 @@ function on_load ( )
 			'X', '',
 			'7', '/',
 			'X', 'X', '7'
-		}
+		]
 	);
 
 
