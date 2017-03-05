@@ -1,28 +1,28 @@
 {
-    "dependencies": {},
-    "devDependencies": {
-        "electron": "1.4.13",
-        "electron-builder": "latest"
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "^1.4.13",
+    "electron-builder": "latest"
+  },
+  "build": {
+    "appId": "hr.creaticon.eatodo",
+    "mac.category": "public.app-category.productivity",
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "iconUrl": "http://eatodo.s3.amazonaws.com/icon.ico"
     },
-    "build": {
-        "appId": "hr.creaticon.eatodo",
-        "mac.category": "public.app-category.productivity",
-        "linux": {
-            "target": [
-                "AppImage",
-                "deb"
-            ],
-            "iconUrl": "http://eatodo.s3.amazonaws.com/icon.ico"
-        },
-        "win": {
-            "target": "NSIS",
-            "iconUrl": "http://eatodo.s3.amazonaws.com/icon.ico"
-        }
-    },
-    "scripts": {
-	    "postinstall": "install-app-deps",
-	    "start": "electron ./app --enable-logging",
-	    "dev": "NODE_ENV='development' npm run start",
-	    "dist": "build --x64 --ia32"
-	}
+    "win": {
+      "target": "NSIS",
+      "iconUrl": "http://eatodo.s3.amazonaws.com/icon.ico"
+    }
+  },
+  "scripts": {
+    "postinstall": "install-app-deps",
+    "start": "electron ./app --enable-logging",
+    "dev": "NODE_ENV='development' npm run start",
+    "dist": "build --x64 --ia32"
+  }
 }
