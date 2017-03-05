@@ -5,8 +5,119 @@ var _disabledColor = "gray";
 var _activeColor = "red";
 var _pastColor = "white";
 
+var _previousGames = [];
+
+function add_previous_game ( previousGame )
+{
+
+	_previousGames.push ( previousGame );
+
+}
+
+
 function on_load ( )
 {
+
+	// 2017-02-19 (g1)
+	add_previous_game ( 
+		{
+			'7', '/',		// Frame 1
+			'8', '/',		// Frame 2
+			'X', '',		// Frame 3
+			'8', '/',		// Frame 4
+			'X', '',		// Frame 5
+			'9', '.',		// Frame 6
+			'X', '',		// Frame 7
+			'7', '.',		// Frame 8
+			'7', '/',		// Frame 9
+			'7', '/', '5'	// Frame 10
+		}
+	);
+
+	// 2017-02-19 (g2)
+	add_previous_game ( 
+		{
+			'X', '',		// Frame 1
+			'X', '',		// Frame 2
+			'5', '/',		// Frame 3
+			'6', '2',		// Frame 4
+			'9', '/',		// Frame 5
+			'8', '/',		// Frame 6
+			'X', '',		// Frame 7
+			'7', '1',		// Frame 8
+			'9', '.',		// Frame 9
+			'X', '8', '1'	// Frame 10
+		}
+	);
+
+	// 2017-02-19 (g3)
+	add_previous_game ( 
+		{
+			'9', '/',
+			'4', '4',
+			'6', '1',
+			'9', '/',
+			'X', '',
+			'9', '/',
+			'X', '',
+			'7', '2',
+			'9', '.',
+			'X', '9', '.'
+		}
+	);
+
+
+
+
+	// 2017-02-26 (g1)
+	add_previous_game ( 
+		{
+			'5', '2',
+			'9', '/',
+			'6', '2',
+			'6', '/',
+			'9', '/',
+			'9', '/',
+			'7', '2',
+			'X', '',
+			'7', '/',
+			'6', '3', '.'
+		}
+	);
+
+	// 2017-02-26 (g2)
+	add_previous_game ( 
+		{
+			'9', '/',
+			'X', '',
+			'8', '/',
+			'5', '4',
+			'9', '.',
+			'9', '/',
+			'7', '/',
+			'6', '.',
+			'6', '/',
+			'7', '/', '9'
+		}
+	);
+
+
+	// 2017-02-26 (g3)
+	add_previous_game ( 
+		{
+			'X', '',
+			'X', '',
+			'6', '/',
+			'8', '1',
+			'8', '1',
+			'X', '',
+			'7', '/',
+			'X', '',
+			'7', '/',
+			'X', 'X', '7'
+		}
+	);
+
 
 	var pointCellElements = document.querySelectorAll(".pointCell");
 
