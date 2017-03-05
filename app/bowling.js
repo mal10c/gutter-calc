@@ -6,12 +6,19 @@ var _activeColor = "red";
 var _pastColor = "white";
 
 var _previousGames = [];
+var math = require('mathjs');
 
 function add_previous_game ( previousGame )
 {
 
 	_previousGames.push ( previousGame );
 
+}
+
+
+function round(value, decimals) 
+{
+	return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
 }
 
 
@@ -131,7 +138,7 @@ function on_load ( )
 
 	});
 
-
+	populate_average_values ( );
 	set_active_frame ( _activeFrame, _activeThrow, true );
 
 
@@ -185,6 +192,27 @@ function on_load ( )
 
 }
 
+
+function populate_average_values ( )
+{
+
+	var index = 0;
+
+	for ( index = 0; index < 10; index++ )
+	{
+		var avg = calculate_average_frame_from_previous_games ( index );
+		document.getElementById("avg" + index).innerHTML = round ( avg, 2 );
+		var sdev = calculate_sdev_frame_from_previous_games ( index );
+		document.getElementById("sdev" + index).innerHTML = round ( sdev, 2 );
+
+		var min = avg - sdev;
+		var max = avg + sdev;
+
+		document.getElementById("range" + index).innerHTML = round(min, 2) + " - " + round(max, 2);
+	}
+	
+}
+
 function set_active_frame ( frame, ballThrow, disableFollowingFrames )
 {
 
@@ -193,6 +221,9 @@ function set_active_frame ( frame, ballThrow, disableFollowingFrames )
 
 	var newID = frame + "" + ballThrow;
 	document.getElementById(newID).style.backgroundColor = _activeColor;
+
+	var avgFrame = calculate_average_frame_from_previous_games ( frame );
+	document.getElementById("avgForFrame").innerHTML = "<b>Frame " + frame + " Average: " + avgFrame + "</b>";
 
 	if ( ballThrow === 0 )
 	{
@@ -499,7 +530,6 @@ function calculate_score ( )
 	var avg = calculate_average_per_frame ( arr );
 	document.getElementById("avgPerFrame").innerHTML = "Average Per Frame: " + avg;
 
-
 	
 	var goal = document.getElementById("txt_goal").value;
 	var fromGoal = parseInt(goal - score);
@@ -520,6 +550,45 @@ function calculate_score ( )
 		document.getElementById("fromGoal").innerHTML = fromGoal + " points to go!";
 	}
 
+}
+
+
+function calculate_average_frame_from_previous_games ( frame )
+{
+	var index;
+	var average = 0;
+	var tmp;
+
+	for ( index = 0; index < _previousGames.length; index ++ )
+	{
+		console.log ( "Previous game " + index );
+		tmp = calculate_score_for_frame ( _previousGames[index], frame );
+		console.log ( "Open frame pts: " + tmp );
+		average += tmp;
+	}
+
+	console.log ( "Avg = ", average );
+	average /= index;
+
+	return average;
+}
+
+
+
+function calculate_sdev_frame_from_previous_games ( frame )
+{
+	var index;
+	var sdev = 0;
+	var vals = [];
+
+	for ( index = 0; index < _previousGames.length; index ++ )
+	{
+		vals.push ( calculate_score_for_frame(_previousGames[index], frame) );
+	}
+
+	sdev = math.std ( vals );
+	
+	return sdev;
 }
 
 
